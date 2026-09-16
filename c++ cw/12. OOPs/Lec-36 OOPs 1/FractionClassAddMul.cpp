@@ -63,19 +63,22 @@ public:
 // }
 
 int main(){
+    //Print And Simplification
+    // Fraction f3(4,88);
+    // f3.simplify();
+    // f3.print();
+
+    //Addition
     // Fraction f1(3,5);
     // Fraction f2(2,5);
     // f1.add(f2);
     // f1.print();
 
+    //Multiplication
     // Fraction f1(2,3);
     // Fraction f2(3,2);
     // f1.multiply(f2);
     // f1.print();
-
-    // Fraction f3(4,88);
-    // f3.simplify();
-    // f3.print();
 
     // Fraction res = multiply(f1, f2);
     // f1.print();

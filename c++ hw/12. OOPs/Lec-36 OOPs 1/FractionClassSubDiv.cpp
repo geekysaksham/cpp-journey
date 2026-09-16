@@ -52,18 +52,21 @@ public:
 
 int main(){
 
+    //Print and Simplify
     // Fraction f3(4,88);
     // f3.simplify();
     // f3.print();
 
+    //Subtraction
     // Fraction f1(12,1);
     // Fraction f2(3,1);
-    // f1.div(f2);
+    // f1.sub(f2);
     // f1.print();
-
+    
+    //Division
     Fraction f1(12,1);
     Fraction f2(3,1);
-    f1.sub(f2);
+    f1.div(f2);
     f1.print();
 
 }
