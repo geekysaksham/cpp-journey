@@ -20,6 +20,21 @@ void print(Node* head){
     }
 }
 
+void printRec(Node* head){
+    if(head == NULL){
+        cout<<endl;
+        return;
+    }
+    cout<<head->val<<" ";
+    printRec(head->next);
+}
+
+void printRevRec(Node* head){
+    if(head == NULL) return;
+    printRevRec(head->next);
+    cout<<head->val<<" ";
+}
+
 int main(){
     Node* a = new Node(7); //head
     Node* b = new Node(0);
@@ -34,6 +49,9 @@ int main(){
     d->next = e;
 
     print(a);
+    cout<<endl;
+    // printRec(a);
+    printRevRec(a);
 
     // cout<<b->val<<endl;
     // cout<<a->val<<" "; // 7
