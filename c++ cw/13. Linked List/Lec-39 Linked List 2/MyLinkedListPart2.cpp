@@ -56,96 +56,93 @@ public:
         }
     }
     void insert(int idx, int val){
-        Node* n = new Node(val);
-        if(idx == 0){
-            n->next = head;
-            head = n;
-        }
-        else if(idx > 0 && idx < size){
-            Node* prevPtr = head;
-            Node* currPtr = head;
-            for(int i=1;i<idx;i++){
-                prevPtr = prevPtr->next;
-            }
-            currPtr = prevPtr->next;
-            prevPtr->next = n;
-            n->next = currPtr;
-        }
-        else if(idx == size){
-            tail->next = n;
-            tail = n;
-            tail->next = NULL;
-        }
-        else{
+        if(idx<0 || idx>size){
             cout<<"Invalid Index!"<<endl;
             return;
+        }
+        else if(idx == 0){
+            insertAtHead(val);
+            return;
+        }
+        else if(idx == size){
+            insertAtTail(val);
+            return;
+        }
+        else{
+            Node* n = new Node(30);
+            Node* temp = head;
+            for(int i=0;i<idx-1;i++){
+                temp = temp->next;
+            }
+            n->next = temp->next;
+            temp->next = n;
         }
         size++;
     }
-    void remove(int idx){ //delete(idx)
-        if(idx==0) head = head->next;
-        else if(idx==size-1){
-            Node* temp = head;
-            for(int i=1;i<=size-2;i++){
-                temp = temp->next;
-            }
-            tail = temp;
-            tail->next = NULL;
+    int get(int idx){
+        if(idx<0 || idx>=size){
+            cout<<"Invalid Index!"<<endl;
+            return -1;
         }
-        else if(idx>0 && idx<size-1){
-            Node* prevPtr = head;
-            for(int i=1;i<idx;i++){
-                prevPtr = prevPtr->next;
-            }
-            prevPtr->next = prevPtr->next->next;
+        Node* temp = head;
+        for(int i=0;i<idx;i++){
+            temp = temp->next;
+        }
+        return temp->val;
+    }
+    void removeAtTail(){
+        if(size == 0){
+            cout<<"Underflow!"<<endl;
+            return;
+        }
+        else if(size == 1){
+            head = NULL;
+            tail = NULL;
         }
         else{
-            cout<<"Invalid Index!"<<endl;
-            return;
+            Node* temp = head;
+            while(temp->next->next != NULL){
+                temp = temp->next;
+            }
+            temp->next = NULL;
+            tail = temp;
         }
         size--;
     }
-    int get(int idx){
-        if(idx == 0) return head->val;
-        else if(idx>0 && idx<size){
-            Node* temp = head;
-            for(int i=1;i<=idx;i++){
-                temp = temp->next;
-            }
-            return temp->val;
+    void remove(int idx){
+        if(size == 0){
+            cout<<"Underflow"<<endl;
+            return;
+        }
+        else if(idx<0 || idx >= size){
+            cout<<"Invalid Index!"<<endl;
+            return;
+        }
+        else if(idx == 0){
+            removeAtHead();
+        }
+        else if(idx == size-1){
+            removeAtTail();
         }
         else{
-            cout<<"Invalid Index!";
-            return -1;
+            Node* temp = head;
+            for(int i=0;i<idx-1;i++){
+                temp = temp->next;
+            }
+            temp->next = temp->next->next;
         }
+        size--;
     }
 };
 int main(){
     MyLinkedList list;
-
-    list.insertAtTail(10);
-    list.insertAtTail(20);
-    list.insertAtTail(30);
+    list.insertAtTail(9);
+    list.insertAtTail(-7);
+    list.insertAtTail(1);
+    list.insertAtTail(4);
+    list.insertAtTail(41);
     list.display();
-
-    list.insertAtHead(40);
+    list.insert(5,30);
     list.display();
-
-    list.insert(2, 50);
-    list.display();
-
-    list.insert(0, 60);
-    list.display();
-
-    list.remove(3);
-    list.display();
-
-    list.remove(0);
-    list.display();
-
-    cout << list.get(0) << endl;
-    cout << list.get(2) << endl;
-
-    cout << list.length() << endl;
-
+    cout<<list.get(0)<<endl;
 }
