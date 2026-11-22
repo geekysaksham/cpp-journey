@@ -1,0 +1,35 @@
+//From Moris Traversal
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        TreeNode* curr = root;
+        TreeNode* prev = NULL;
+        bool flag = true;
+        while(curr != NULL){
+            if(curr->left != NULL){
+                TreeNode* p = curr->left;
+                while(p->right != NULL && p->right != curr) p = p->right;
+                if(p->right == NULL){
+                    p->right = curr;
+                    curr = curr->left;
+                }
+                else{
+                    p->right = NULL;
+                    if(prev != NULL && prev->val >= curr->val){
+                        flag =  false;
+                    }
+                    prev = curr; 
+                    curr = curr->right;
+                }
+            }
+            else{
+                if(prev != NULL && prev->val >= curr->val){
+                    flag =  false;
+                }
+                prev = curr; 
+                curr = curr->right;
+            }
+        }
+        return flag;
+    }
+};
